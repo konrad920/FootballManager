@@ -9,5 +9,7 @@ namespace FootballManager.DataAccess
         }
 
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Coach> Coaches { get; set; }
     }
 }
