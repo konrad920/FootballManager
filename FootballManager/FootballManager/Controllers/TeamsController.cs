@@ -8,18 +8,25 @@ namespace FootballManager.Controllers
     [Route("[controller]")]
     public class TeamsController : ControllerBase
     {
-        private readonly IRepository<Team> repository;
+        private readonly IRepository<Team> teamRepository;
 
-        public TeamsController(IRepository<Team> repository)
+        public TeamsController(IRepository<Team> teamRepository)
         {
-            this.repository = repository;
+            this.teamRepository = teamRepository;
         }
 
         [HttpGet]
         [Route("AllTeams")]
         public IEnumerable<Team> GetAllTeams()
         {
-            return repository.GetAll();
+            return this.teamRepository.GetAll();
+        }
+
+        [HttpGet]
+        [Route("{teamId}")]
+        public Team GetTeam(int teamId)
+        {
+            return this.teamRepository.GetById(teamId);
         }
     }
 }
