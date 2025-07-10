@@ -17,24 +17,24 @@ namespace FootballManager.AplicationServices.API.Handlers
         public Task<GetAllPlayersResponse> Handle(GetAllPlayersRequest request, CancellationToken cancellationToken)
         {
             var players = this.repository.GetAll();
-            /*var domainPlayers = players.Select(x => new Domain.ModelsDTO.PlayerDTO()
+            var domainPlayers = players.Select(x => new PlayerDTO()
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
                 position = x.Position
             });
-            */
 
-            var domainPlayers = new List<PlayerDTO>();
-            foreach (var player in players)
-            {
-                domainPlayers.Add(new PlayerDTO()
-                {
-                    Id = player.Id,
-                    FirstName = player.FirstName,
-                    position = player.Position
-                });
-            }
+
+            //var domainPlayers = new List<PlayerDTO>();
+            //foreach (var player in players)
+            //{
+            //    domainPlayers.Add(new PlayerDTO()
+            //    {
+            //        Id = player.Id,
+            //        FirstName = player.FirstName,
+            //        position = player.Position
+            //    });
+            //}
             var response = new GetAllPlayersResponse()
             {
                 Data = domainPlayers.ToList()

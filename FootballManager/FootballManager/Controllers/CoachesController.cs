@@ -6,18 +6,18 @@ namespace FootballManager.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TeamsController : ControllerBase
+    public class CoachesController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public TeamsController(IMediator mediator)
+        public CoachesController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
         [HttpGet]
-        [Route("AllTeams")]
-        public async Task<IActionResult> GetAllTeams([FromQuery] GetAllTeamsRequest request)
+        [Route("AllCoaches")]
+        public async Task<IActionResult> GetAllCoaches([FromQuery] GetAllCoachesRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);
