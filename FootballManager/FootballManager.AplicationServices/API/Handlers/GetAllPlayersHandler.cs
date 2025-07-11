@@ -1,4 +1,5 @@
-﻿using FootballManager.AplicationServices.API.Domain;
+﻿using AutoMapper;
+using FootballManager.AplicationServices.API.Domain;
 using FootballManager.AplicationServices.API.Domain.ModelsDTO;
 using FootballManager.DataAccess;
 using FootballManager.DataAccess.Entities;
@@ -9,35 +10,21 @@ namespace FootballManager.AplicationServices.API.Handlers
     public class GetAllPlayersHandler : IRequestHandler<GetAllPlayersRequest, GetAllPlayersResponse>
     {
         private readonly IRepository<Player> repository;
+        private readonly IMapper mapper;
 
-        public GetAllPlayersHandler(IRepository<Player> repository)
+        public GetAllPlayersHandler(IRepository<Player> repository, IMapper mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
         public Task<GetAllPlayersResponse> Handle(GetAllPlayersRequest request, CancellationToken cancellationToken)
         {
             var players = this.repository.GetAll();
-            var domainPlayers = players.Select(x => new PlayerDTO()
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                position = x.Position
-            });
+            var mappedPLayers = this.mapper.Map<List<PlayerDTO>>(players);
 
-
-            //var domainPlayers = new List<PlayerDTO>();
-            //foreach (var player in players)
-            //{
-            //    domainPlayers.Add(new PlayerDTO()
-            //    {
-            //        Id = player.Id,
-            //        FirstName = player.FirstName,
-            //        position = player.Position
-            //    });
-            //}
             var response = new GetAllPlayersResponse()
             {
-                Data = domainPlayers.ToList()
+                Data = mappedPLayers
             };
 
             return Task.FromResult(response);

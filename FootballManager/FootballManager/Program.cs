@@ -1,10 +1,16 @@
 using FootballManager.AplicationServices.API.Domain;
+using FootballManager.AplicationServices.Mappings;
 using FootballManager.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AllowNullCollections = true;
+}, typeof(PlayersProfile));
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ResponseBase<>).Assembly));
 
