@@ -17,16 +17,16 @@ namespace FootballManager.AplicationServices.API.Handlers
             this.repository = repository;
             this.mapper = mapper;
         }
-        public Task<GetAllCoachesResponse> Handle(GetAllCoachesRequest request, CancellationToken cancellationToken)
+        public async Task<GetAllCoachesResponse> Handle(GetAllCoachesRequest request, CancellationToken cancellationToken)
         {
-            var coaches = repository.GetAll();
+            var coaches = await repository.GetAll();
             var mappedCoaches = this.mapper.Map<List<CoachDTO>>(coaches);
 
             var response = new GetAllCoachesResponse()
             {
                 Data = mappedCoaches
             };
-            return Task.FromResult(response);
+            return response;
         }
     }
 }

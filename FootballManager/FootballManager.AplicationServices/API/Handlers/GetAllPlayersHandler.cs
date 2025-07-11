@@ -17,9 +17,9 @@ namespace FootballManager.AplicationServices.API.Handlers
             this.repository = repository;
             this.mapper = mapper;
         }
-        public Task<GetAllPlayersResponse> Handle(GetAllPlayersRequest request, CancellationToken cancellationToken)
+        public async Task<GetAllPlayersResponse> Handle(GetAllPlayersRequest request, CancellationToken cancellationToken)
         {
-            var players = this.repository.GetAll();
+            var players = await this.repository.GetAll();
             var mappedPLayers = this.mapper.Map<List<PlayerDTO>>(players);
 
             var response = new GetAllPlayersResponse()
@@ -27,7 +27,7 @@ namespace FootballManager.AplicationServices.API.Handlers
                 Data = mappedPLayers
             };
 
-            return Task.FromResult(response);
+            return response;
         }
     }
 }
