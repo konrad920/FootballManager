@@ -2,24 +2,25 @@
 using FootballManager.AplicationServices.API.Domain;
 using FootballManager.AplicationServices.API.Domain.ModelsDTO;
 using FootballManager.DataAccess;
-using FootballManager.DataAccess.Entities;
+using FootballManager.DataAccess.CQRS.Queries;
 using MediatR;
 
 namespace FootballManager.AplicationServices.API.Handlers
 {
     public class GetAllTeamsHandler : IRequestHandler<GetAllTeamsRequest, GetAllTeamsResponse>
     {
-        private readonly IRepository<Team> repository;
         private readonly IMapper mapper;
+        private readonly IQueryExecutor queryExecutor;
 
-        public GetAllTeamsHandler(IRepository<Team> repository, IMapper mapper)
+        public GetAllTeamsHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
-            this.repository = repository;
             this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
         public async Task<GetAllTeamsResponse> Handle(GetAllTeamsRequest request, CancellationToken cancellationToken)
         {
-            var teams = await repository.GetAll();
+            var query = new GetAllTeamsQuery();
+            var teams = await this.queryExecutor.Execute(query);
             var mappedTeams = this.mapper.Map<List<TeamDTO>>(teams);
 
             var response = new GetAllTeamsResponse()

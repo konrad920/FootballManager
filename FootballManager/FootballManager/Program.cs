@@ -14,6 +14,8 @@ builder.Services.AddAutoMapper(cfg =>
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ResponseBase<>).Assembly));
 
+builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var connectionString = builder.Configuration.GetConnectionString("FootballManagerDatabaseConnection");
