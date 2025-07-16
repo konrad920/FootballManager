@@ -22,5 +22,13 @@ namespace FootballManager.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
+
+        [HttpPost]
+        [Route("AddPlayer")]
+        public async Task<IActionResult> AddNewPlayer([FromBody] AddNewPLayerRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
     }
 }

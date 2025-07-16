@@ -4,7 +4,9 @@ namespace FootballManager.DataAccess.Entities
 {
     public class Player : EntityBase
     {
-        public List<Team> Teams { get; set; }
+        public int TeamId { get; set; }
+
+        public Team Team { get; set; }
 
         [Required]
         [MaxLength(100)]

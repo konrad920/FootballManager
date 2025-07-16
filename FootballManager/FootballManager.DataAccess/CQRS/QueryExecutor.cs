@@ -1,6 +1,6 @@
 ﻿using FootballManager.DataAccess.CQRS.Queries;
 
-namespace FootballManager.DataAccess
+namespace FootballManager.DataAccess.CQRS
 {
     public class QueryExecutor : IQueryExecutor
     {

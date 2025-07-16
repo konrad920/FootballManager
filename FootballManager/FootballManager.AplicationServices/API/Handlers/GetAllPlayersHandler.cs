@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FootballManager.AplicationServices.API.Domain;
 using FootballManager.AplicationServices.API.Domain.ModelsDTO;
-using FootballManager.DataAccess;
+using FootballManager.DataAccess.CQRS;
 using FootballManager.DataAccess.CQRS.Queries;
 using MediatR;
 

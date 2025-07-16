@@ -1,6 +1,7 @@
 using FootballManager.AplicationServices.API.Domain;
 using FootballManager.AplicationServices.Mappings;
 using FootballManager.DataAccess;
+using FootballManager.DataAccess.CQRS;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddAutoMapper(cfg =>
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ResponseBase<>).Assembly));
 
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
+
+builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

@@ -3,6 +3,7 @@ using FootballManager.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballManager.DataAccess.Migrations
 {
     [DbContext(typeof(FootballManagerContext))]
-    partial class FootballManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20250713101336_RechangeRelationTeamPLayer")]
+    partial class RechangeRelationTeamPLayer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,12 +75,7 @@ namespace FootballManager.DataAccess.Migrations
                     b.Property<long>("Salary")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
 
                     b.ToTable("Players");
                 });
@@ -109,15 +107,19 @@ namespace FootballManager.DataAccess.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("FootballManager.DataAccess.Entities.Player", b =>
+            modelBuilder.Entity("PlayerTeam", b =>
                 {
-                    b.HasOne("FootballManager.DataAccess.Entities.Team", "Team")
-                        .WithMany("Players")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("PlayersId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Team");
+                    b.Property<int>("TeamsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PlayersId", "TeamsId");
+
+                    b.HasIndex("TeamsId");
+
+                    b.ToTable("PlayerTeam");
                 });
 
             modelBuilder.Entity("FootballManager.DataAccess.Entities.Team", b =>
@@ -131,14 +133,24 @@ namespace FootballManager.DataAccess.Migrations
                     b.Navigation("Coach");
                 });
 
+            modelBuilder.Entity("PlayerTeam", b =>
+                {
+                    b.HasOne("FootballManager.DataAccess.Entities.Player", null)
+                        .WithMany()
+                        .HasForeignKey("PlayersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FootballManager.DataAccess.Entities.Team", null)
+                        .WithMany()
+                        .HasForeignKey("TeamsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FootballManager.DataAccess.Entities.Coach", b =>
                 {
                     b.Navigation("Teams");
-                });
-
-            modelBuilder.Entity("FootballManager.DataAccess.Entities.Team", b =>
-                {
-                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }
