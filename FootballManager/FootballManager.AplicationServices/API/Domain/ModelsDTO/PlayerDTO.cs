@@ -10,5 +10,7 @@ namespace FootballManager.AplicationServices.API.Domain.ModelsDTO
 
         public PlayerPositions position { get; set; }
 
+        public string TeamName { get; set; }
+
     }
 }

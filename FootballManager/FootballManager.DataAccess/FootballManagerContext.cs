@@ -11,5 +11,24 @@ namespace FootballManager.DataAccess
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Coach> Coaches { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Team → Players (1:N)
+            modelBuilder.Entity<Team>()
+                .HasMany(t => t.Players)
+                .WithOne(p => p.Team)
+                .HasForeignKey(p => p.TeamId)
+                .OnDelete(DeleteBehavior.Cascade); // lub .Restrict jeśli nie chcesz kaskady
+
+            // Team → Coach (1:1)
+            modelBuilder.Entity<Team>()
+                .HasOne(t => t.Coach)
+                .WithOne(c => c.Team)
+                .HasForeignKey<Team>(t => t.CoachId)
+                .OnDelete(DeleteBehavior.Restrict); // ważne, żeby Coach nie był usuwany razem z Team
+        }
     }
 }

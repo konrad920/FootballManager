@@ -7,7 +7,9 @@ namespace FootballManager.DataAccess.CQRS.Queries
     {
         public override Task<List<Team>> Execute(FootballManagerContext context)
         {
-            return context.Teams.ToListAsync();
+            return context.Teams
+                .Include(t => t.Players)
+                .ToListAsync();
         }
     }
 }

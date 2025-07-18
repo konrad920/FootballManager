@@ -1,4 +1,6 @@
 ﻿using FootballManager.AplicationServices.API.Domain;
+using FootballManager.DataAccess;
+using FootballManager.DataAccess.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +11,12 @@ namespace FootballManager.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly IMediator mediator;
+        private readonly IRepository<Team> repository;
 
-        public TeamsController(IMediator mediator)
+        public TeamsController(IMediator mediator, IRepository<Team> repository)
         {
             this.mediator = mediator;
+            this.repository = repository;
         }
 
         [HttpGet]
