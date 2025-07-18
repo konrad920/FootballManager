@@ -21,14 +21,19 @@ namespace FootballManager.DataAccess
                 .HasMany(t => t.Players)
                 .WithOne(p => p.Team)
                 .HasForeignKey(p => p.TeamId)
-                .OnDelete(DeleteBehavior.Cascade); // lub .Restrict jeśli nie chcesz kaskady
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Team → Coach (1:1)
             modelBuilder.Entity<Team>()
                 .HasOne(t => t.Coach)
                 .WithOne(c => c.Team)
                 .HasForeignKey<Team>(t => t.CoachId)
-                .OnDelete(DeleteBehavior.Restrict); // ważne, żeby Coach nie był usuwany razem z Team
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Convert int to string
+            modelBuilder.Entity<Player>()
+                .Property(p => p.Position)
+                .HasConversion<string>();
         }
     }
 }
