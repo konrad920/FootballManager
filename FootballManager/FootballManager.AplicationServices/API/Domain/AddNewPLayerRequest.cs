@@ -3,7 +3,7 @@ using MediatR;
 
 namespace FootballManager.AplicationServices.API.Domain
 {
-    public class AddNewPLayerRequest : IRequest<AddNewPLayerResponse>
+    public class AddNewPlayerRequest : IRequest<AddNewPlayerResponse>
     {
         private PlayerPositions position;
 

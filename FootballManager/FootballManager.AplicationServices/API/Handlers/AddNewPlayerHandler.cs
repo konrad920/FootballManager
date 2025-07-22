@@ -8,7 +8,7 @@ using MediatR;
 
 namespace FootballManager.AplicationServices.API.Handlers
 {
-    public class AddNewPlayerHandler : IRequestHandler<AddNewPLayerRequest, AddNewPLayerResponse>
+    public class AddNewPlayerHandler : IRequestHandler<AddNewPlayerRequest, AddNewPlayerResponse>
     {
         private readonly IMapper mapper;
         private readonly ICommandExecutor commandExecutor;
@@ -18,7 +18,7 @@ namespace FootballManager.AplicationServices.API.Handlers
             this.mapper = mapper;
             this.commandExecutor = commandExecutor;
         }
-        public async Task<AddNewPLayerResponse> Handle(AddNewPLayerRequest request, CancellationToken cancellationToken)
+        public async Task<AddNewPlayerResponse> Handle(AddNewPlayerRequest request, CancellationToken cancellationToken)
         {
             var player = this.mapper.Map<Player>(request);
             var command = new AddNewPlayerCommand()
@@ -28,7 +28,7 @@ namespace FootballManager.AplicationServices.API.Handlers
             var playerFromDB = await this.commandExecutor.Execute(command);
 
             var mappedPlayer = this.mapper.Map<PlayerDTO>(playerFromDB);
-            var response = new AddNewPLayerResponse()
+            var response = new AddNewPlayerResponse()
             {
                 Data = mappedPlayer
             };

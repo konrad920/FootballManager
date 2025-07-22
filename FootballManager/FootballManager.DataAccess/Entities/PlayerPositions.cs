@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace FootballManager.DataAccess.Entities
 {
@@ -27,5 +29,15 @@ namespace FootballManager.DataAccess.Entities
 
         [Description("Napastnik")]
         FW = 8
+    }
+
+    public static class EnumExtensions
+    {
+        public static string GetDescription(this Enum value)
+        {
+            var field = value.GetType().GetField(value.ToString());
+            var attr = field.GetCustomAttribute<DescriptionAttribute>();
+            return attr?.Description ?? value.ToString();
+        }
     }
 }

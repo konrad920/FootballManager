@@ -8,7 +8,8 @@ namespace FootballManager.AplicationServices.API.Domain.ModelsDTO
 
         public string FirstName { get; set; }
 
-        public PlayerPositions position { get; set; }
+        //public PlayerPositions Position { get; set; }
+        public string Position { get; set; }
 
         public string TeamName { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace FootballManager.AplicationServices.API.Domain
 {
-    public class AddNewPLayerResponse : ResponseBase<PlayerDTO>
+    public class AddNewPlayerResponse : ResponseBase<PlayerDTO>
     {
     }
 }

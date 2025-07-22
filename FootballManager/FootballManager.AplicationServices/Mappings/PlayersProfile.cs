@@ -9,7 +9,7 @@ namespace FootballManager.AplicationServices.Mappings
     {
         public PlayersProfile()
         {
-            this.CreateMap<AddNewPLayerRequest, Player>()
+            this.CreateMap<AddNewPlayerRequest, Player>()
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.FirstName))
                 .ForMember(x => x.LastName, y => y.MapFrom(z => z.LastName))
                 .ForMember(x => x.Position, y => y.MapFrom(z => z.Position))
@@ -19,7 +19,7 @@ namespace FootballManager.AplicationServices.Mappings
             this.CreateMap<Player, PlayerDTO>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.FirstName))
-                .ForMember(x => x.position, y => y.MapFrom(z => z.Position))
+                .ForMember(x => x.Position, y => y.MapFrom(z => z.Position.GetDescription()))
                 .ForMember(x => x.TeamName, y => y.MapFrom(z => z.Team.Name));
         }
     }

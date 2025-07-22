@@ -25,7 +25,7 @@ namespace FootballManager.Controllers
 
         [HttpPost]
         [Route("AddPlayer")]
-        public async Task<IActionResult> AddNewPlayer([FromBody] AddNewPLayerRequest request)
+        public async Task<IActionResult> AddNewPlayer([FromBody] AddNewPlayerRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);
