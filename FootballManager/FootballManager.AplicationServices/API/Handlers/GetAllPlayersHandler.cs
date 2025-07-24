@@ -3,6 +3,7 @@ using FootballManager.AplicationServices.API.Domain;
 using FootballManager.AplicationServices.API.Domain.ModelsDTO;
 using FootballManager.DataAccess.CQRS;
 using FootballManager.DataAccess.CQRS.Queries;
+using FootballManager.DataAccess.Entities;
 using MediatR;
 
 namespace FootballManager.AplicationServices.API.Handlers
@@ -19,7 +20,10 @@ namespace FootballManager.AplicationServices.API.Handlers
         }
         public async Task<GetAllPlayersResponse> Handle(GetAllPlayersRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetAllPlayersQuery();
+            var query = new GetAllPlayersQuery()
+            {
+                Position = request.Position
+            };
             var players = await this.queryExecutor.Execute(query);
             var mappedPLayers = this.mapper.Map<List<PlayerDTO>>(players);
 

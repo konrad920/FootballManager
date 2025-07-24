@@ -19,7 +19,10 @@ namespace FootballManager.AplicationServices.API.Handlers
         }
         public async Task<GetAllTeamsResponse> Handle(GetAllTeamsRequest request, CancellationToken cancellationToken)
         {
-            var query = new GetAllTeamsQuery();
+            var query = new GetAllTeamsQuery()
+            {
+                PartOfName = request.PartOFName
+            };
             var teams = await this.queryExecutor.Execute(query);
             var mappedTeams = this.mapper.Map<List<TeamDTO>>(teams);
 
