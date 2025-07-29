@@ -19,7 +19,7 @@ namespace FootballManager.DataAccess.CQRS.Queries
             {
                 return context.Players
                     .Include(p => p.Team)
-                    .Where(p => p.Position == PlayerPositionMapper.FromShort(this.Position))
+                    .Where(p => p.Position == PlayerPositionMapper.FromString(this.Position))
                     .ToListAsync();
             }
         }

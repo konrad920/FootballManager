@@ -23,6 +23,18 @@ namespace FootballManager.Controllers
             return this.Ok(response);
         }
 
+        [HttpGet]
+        [Route("ById/{playerId}")]
+        public async Task<IActionResult> GetPlayerById([FromRoute] int playerId)
+        {
+            var request = new GetPlayerByIdRequest()
+            {
+                PlayerId = playerId
+            };
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
         [HttpPost]
         [Route("AddPlayer")]
         public async Task<IActionResult> AddNewPlayer([FromBody] AddNewPlayerRequest request)
