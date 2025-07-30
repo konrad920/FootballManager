@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FootballManager.AplicationServices.API.Domain;
 using FootballManager.AplicationServices.API.Domain.ModelsDTO;
+using FootballManager.AplicationServices.API.Domain.Player;
 using FootballManager.DataAccess.Entities;
 using System.ComponentModel;
 using System.Reflection;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FootballManager.AplicationServices.API.Domain;
 using FootballManager.AplicationServices.API.Domain.ModelsDTO;
+using FootballManager.AplicationServices.API.Domain.Team;
 using FootballManager.DataAccess.Entities;
 
 namespace FootballManager.AplicationServices.Mappings

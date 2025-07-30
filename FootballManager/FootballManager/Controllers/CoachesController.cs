@@ -1,4 +1,4 @@
-﻿using FootballManager.AplicationServices.API.Domain;
+﻿using FootballManager.AplicationServices.API.Domain.Coach;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,6 +38,14 @@ namespace FootballManager.Controllers
         [HttpPost]
         [Route("AddCoach")]
         public async Task<IActionResult> AddNewCoach([FromBody] AddNewCoachRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+        [HttpPut]
+        [Route("EditById")]
+        public async Task<IActionResult> EditCoachById([FromBody] PutCoachByIdRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);

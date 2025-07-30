@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FootballManager.AplicationServices.API.Domain;
+using FootballManager.AplicationServices.API.Domain.Coach;
 using FootballManager.AplicationServices.API.Domain.ModelsDTO;
 using FootballManager.DataAccess.Entities;
 

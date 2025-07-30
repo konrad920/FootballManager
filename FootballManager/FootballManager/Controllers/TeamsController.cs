@@ -1,4 +1,5 @@
 ﻿using FootballManager.AplicationServices.API.Domain;
+using FootballManager.AplicationServices.API.Domain.Team;
 using FootballManager.DataAccess;
 using FootballManager.DataAccess.Entities;
 using MediatR;
@@ -42,6 +43,14 @@ namespace FootballManager.Controllers
         [HttpPost]
         [Route("AddTeam")]
         public async Task<IActionResult> AddNewTeam([FromBody] AddNewTeamRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+        [HttpPut]
+        [Route("EditById")]
+        public async Task<IActionResult> EditTeamById([FromBody] PutTeamByIdRequest request)
         {
             var response = await this.mediator.Send(request);
             return this.Ok(response);
