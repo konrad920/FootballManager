@@ -55,5 +55,13 @@ namespace FootballManager.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
+
+        [HttpDelete]
+        [Route("DeleteById")]
+        public async Task<IActionResult> DeleteTeamById([FromQuery] DeleteTeamByIdRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
     }
 }
